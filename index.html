@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Halaman Utama</title>
+  </head>
+  <body>
+    <h1>Selamat datang di halaman utama</h1>
+    <nav>
+      <ul>
+        <li><a href="/about">About</a></li>
+        <li><a href="/user/123">User</a></li>
+      </ul>
+    </nav>
+
+    <div id="content"></div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+          link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const href = link.getAttribute('href');
+            loadPage(href);
+          });
+        });
+      });
+
+      function loadPage(url) {
+        fetch(url)
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('content').innerHTML = data;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      }
+    </script>
+  </body>
+</html>

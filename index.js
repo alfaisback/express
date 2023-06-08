@@ -1,18 +1,25 @@
-const express = require('express')
-const app = express()
-const port = 3333
+const express = require('express');
+const app = express();
+const port = 3333;
 
+// Fungsi untuk mengirimkan file HTML
+function sendHTMLFile(res, filename) {
+  res.sendFile(__dirname + '/' + filename);
+}
+
+// Rute untuk halaman utama
 app.get('/', (req, res) => {
-    res.send("contoh hal 1 ")
-}) 
+  sendHTMLFile(res, 'index.html');
+});
 
-app.get('/about', (req, res) =>{
-    res.send('about')
-})
+// Rute untuk halaman about
+app.get('/about', (req, res) => {
+  sendHTMLFile(res, 'about.html');
+});
 
+// Rute untuk halaman user
 app.get('/user/:id', (req, res) => {
-    const id = req.params.id;
-    res.send(`user id ${id}`);
-})
+  sendHTMLFile(res, 'user.html');
+});
 
-app.listen(port, () => console.log(`server running on port ${port}`))
+app.listen(port, () => console.log(`Server running on port ${port}`));
